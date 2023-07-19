@@ -16,7 +16,7 @@ builder.Services.AddDbContext<HotelContext>(options =>
 });
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<IRepository<Hotel>, HotelRepository>();
+builder.Services.AddTransient<IRepository<Hotel>, HotelRepositoryMock>();
 builder.Services.AddHealthChecks();
 
 

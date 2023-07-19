@@ -16,7 +16,7 @@ public static class SearchHandler
             [FromServices] IUnitOfWork uof,
             CancellationToken token) =>
         {
-            IEnumerable<Hotel> hotels = await uof.GetHotelRepository().FilterAsync(h => h.Name.Contains(term), skip, page, token);
+            IEnumerable<Hotel> hotels = await uof.GetHotelRepository().FilterAsync(h => h.Name.ToLower().Contains(term.ToLower()), skip, page, token);
             int count = await uof.GetHotelRepository().CountAsync(h => h.Name.Contains(term), token);
 
             return TypedResults.Ok(new SearchHotelsResult { Hotels = hotels, TotalCount = count });
