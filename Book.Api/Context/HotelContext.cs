@@ -12,11 +12,31 @@ public class HotelContext : DbContext
     {
         
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.EnableSensitiveDataLogging();
+        base.OnConfiguring(optionsBuilder);
+    }
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        var hotel1Id = Guid.NewGuid();
+        var hotel2Id = Guid.NewGuid();
+        var hotel3Id = Guid.NewGuid();
+
+        var room101Id = Guid.NewGuid();
+        var room3002Id = Guid.NewGuid();
+        var roomAId = Guid.NewGuid();
+
         builder.Entity<HotelRecord>().HasMany(e => e.Rooms)
             .WithOne(s => s.Hotel)
             .HasForeignKey(s => s.HotelId);
+
+        builder.Entity<HotelRecord>().HasData(
+            new HotelRecord { Id = hotel1Id },
+            new HotelRecord { Id = hotel2Id },
+            new HotelRecord { Id = hotel3Id }
+            );
 
         builder.Entity<RoomRecord>()
             .Property(e => e.Name).HasMaxLength(32);
@@ -25,6 +45,64 @@ public class HotelContext : DbContext
         builder.Entity<RoomRecord>().HasMany(e => e.Bookings)
             .WithOne(s => s.Room)
             .HasForeignKey(s => s.RoomId);
+
+        builder.Entity<RoomRecord>().HasData(
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Economy, Name = "101", Id = room101Id },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Economy, Name = "102" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Economy, Name = "103" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Economy, Name = "104" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Economy, Name = "105" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Economy, Name = "106" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Economy, Name = "107" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "201" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "202" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "203" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "204" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "205" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "206" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "302" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "303" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "304" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "305" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Standard, Name = "306" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Deluxe, Name = "401" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Deluxe, Name = "402" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Deluxe, Name = "403" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Deluxe, Name = "404" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Deluxe, Name = "501" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Deluxe, Name = "502" },
+            new RoomRecord { HotelId = hotel1Id, Type = RoomType.Deluxe, Name = "503" },
+
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "1001" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "1002" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "1003" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "1004" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "2001" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "2002" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "2003" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "2004" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "2005" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "2006" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "3001" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "3002", Id = room3002Id },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "3003" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "3004" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Economy, Name = "3005" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Standard, Name = "3006" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Deluxe, Name = "4001" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Deluxe, Name = "4002" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Deluxe, Name = "4003" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Deluxe, Name = "5001" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Deluxe, Name = "5002" },
+            new RoomRecord { HotelId = hotel2Id, Type = RoomType.Deluxe, Name = "5003" },
+
+            new RoomRecord { HotelId = hotel3Id, Type = RoomType.Deluxe, Name = "A", Id = roomAId },
+            new RoomRecord { HotelId = hotel3Id, Type = RoomType.Deluxe, Name = "B" },
+            new RoomRecord { HotelId = hotel3Id, Type = RoomType.Deluxe, Name = "C" },
+            new RoomRecord { HotelId = hotel3Id, Type = RoomType.Standard, Name = "D" },
+            new RoomRecord { HotelId = hotel3Id, Type = RoomType.Standard, Name = "E" },
+            new RoomRecord { HotelId = hotel3Id, Type = RoomType.Standard, Name = "F" }
+            );
 
         builder.Entity<BookingRecord>()
             .Property(e => e.Guests).IsRequired();
@@ -36,6 +114,21 @@ public class HotelContext : DbContext
             .Property(e => e.EndDate).IsRequired();
         builder.Entity<BookingRecord>()
             .Ignore(b => b.Nights);
+
+        builder.Entity<BookingRecord>().HasData(
+
+            new BookingRecord { RoomId = room101Id, GuestName = "John Smith", Guests = 2, StartDate = DateTime.Now.Date, EndDate = DateTime.Now.AddDays(3).Date },
+            new BookingRecord { RoomId = room101Id, GuestName = "Jane Doe", Guests = 2, StartDate = DateTime.Now.AddDays(3).Date, EndDate = DateTime.Now.AddDays(5).Date },
+            new BookingRecord { RoomId = room101Id, GuestName = "Peter McAllister", Guests = 2, StartDate = DateTime.Now.AddDays(6).Date, EndDate = DateTime.Now.AddDays(7).Date },
+
+            new BookingRecord { RoomId = room3002Id, GuestName = "Jane Austen", Guests = 3, StartDate = DateTime.Now.Date, EndDate = DateTime.Now.AddDays(2).Date },
+            new BookingRecord { RoomId = room3002Id, GuestName = "Edgar Allan Poe", Guests = 1, StartDate = DateTime.Now.AddDays(3).Date, EndDate = DateTime.Now.AddDays(4).Date },
+            new BookingRecord { RoomId = room3002Id, GuestName = "Ernst Hemingway", Guests = 2, StartDate = DateTime.Now.AddDays(4).Date, EndDate = DateTime.Now.AddDays(7).Date },
+
+            new BookingRecord { RoomId = roomAId, GuestName = "Humprey Bogart", Guests = 2, StartDate = DateTime.Now.Date, EndDate = DateTime.Now.AddDays(7).Date },
+            new BookingRecord { RoomId = roomAId, GuestName = "Harrison Ford", Guests = 4, StartDate = DateTime.Now.AddDays(10).Date, EndDate = DateTime.Now.AddDays(12).Date },
+            new BookingRecord { RoomId = roomAId, GuestName = "Tom Hanks", Guests = 2, StartDate = DateTime.Now.AddDays(16).Date, EndDate = DateTime.Now.AddDays(20).Date }
+            );
 
         foreach (IMutableEntityType entityType in builder.Model.GetEntityTypes())
         {
@@ -101,5 +194,5 @@ public class HotelContext : DbContext
 
     public DbSet<HotelRecord> Hotels { get; set; }
     public DbSet<RoomRecord> Rooms { get; set; }
-    public DbSet<BookingRecord> Bookings { get; set; }    
+    public DbSet<BookingRecord> Bookings { get; set; }
 }

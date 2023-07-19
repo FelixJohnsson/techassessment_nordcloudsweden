@@ -8,7 +8,7 @@ public record RoomRecord : ISoftDelete
     public bool IsDeleted { get; set; }
     public Guid HotelId { get; set; }
 
-    public virtual HotelRecord Hotel { get; set; } = new();
+    public virtual HotelRecord Hotel { get; set; }
     public virtual List<BookingRecord> Bookings { get; set; } = new();
 }
 

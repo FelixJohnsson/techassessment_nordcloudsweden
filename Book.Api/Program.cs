@@ -1,6 +1,7 @@
 using Book.Api.Behaviors;
 using Book.Api.Context;
 using Book.Api.Endpoints;
+using Book.Api.Migrations;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,8 @@ builder.Services.AddDbContext<HotelContext>(
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
+
+app.MigrateDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
