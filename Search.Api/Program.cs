@@ -19,6 +19,16 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IRepository<Hotel>, HotelRepositoryMock>();
 builder.Services.AddHealthChecks();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(options =>
+    {
+        options.WithOrigins("http://localhost:3000")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 
 WebApplication app = builder.Build();
 
@@ -30,6 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 
 app.RegisterSearchApis();
 app.MapHealthChecks("/health");

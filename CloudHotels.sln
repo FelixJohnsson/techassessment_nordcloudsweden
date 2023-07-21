@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Api", "Book.Api\Book.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book.Api.Tests", "Book.Api.Tests\Book.Api.Tests.csproj", "{12D7159D-F747-4152-BC0F-CD91C2683DAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Price.Api", "Price.Api\Price.Api.csproj", "{BEFE4B2C-0F19-427F-84E0-CB0AFC928F14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Price.Api", "Price.Api\Price.Api.csproj", "{BEFE4B2C-0F19-427F-84E0-CB0AFC928F14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Price.Api.Tests", "Price.Api.Tests\Price.Api.Tests.csproj", "{8ED17407-0C27-4E3D-84AF-EE2381ED0074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Price.Api.Tests", "Price.Api.Tests\Price.Api.Tests.csproj", "{8ED17407-0C27-4E3D-84AF-EE2381ED0074}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "frontend.public", "frontend.public\frontend.public.esproj", "{1C3E096D-E447-42A2-BA90-8F27EBB1305A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,12 @@ Global
 		{8ED17407-0C27-4E3D-84AF-EE2381ED0074}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8ED17407-0C27-4E3D-84AF-EE2381ED0074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8ED17407-0C27-4E3D-84AF-EE2381ED0074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3E096D-E447-42A2-BA90-8F27EBB1305A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3E096D-E447-42A2-BA90-8F27EBB1305A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3E096D-E447-42A2-BA90-8F27EBB1305A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1C3E096D-E447-42A2-BA90-8F27EBB1305A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3E096D-E447-42A2-BA90-8F27EBB1305A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3E096D-E447-42A2-BA90-8F27EBB1305A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
