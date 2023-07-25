@@ -30,7 +30,7 @@ public class GetBookingsForHotelRequestHandler : IRequestHandler<GetBookingsForH
                 ArriveDate = b.StartDate,
                 GuestName = b.GuestName,
                 Id = b.Id,
-                Nights = b.Nights
+                Nights = b.Nights                
             })
             .ToListAsync(cancellationToken);
 

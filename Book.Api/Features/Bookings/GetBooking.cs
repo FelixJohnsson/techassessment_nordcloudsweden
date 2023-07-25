@@ -16,7 +16,7 @@ public class GetBookingRequestHandler : IRequestHandler<GetBookingRequest, GetBo
 
     public async Task<GetBookingResponse> Handle(GetBookingRequest request, CancellationToken cancellationToken)
     {
-        BookingRecord Booking = await _context.Bookings.FirstAsync(h => h.Id == request.Id, cancellationToken);
+        BookingRecord Booking = await _context.Bookings.Include(b => b.Room).FirstAsync(h => h.Id == request.Id, cancellationToken);
 
         return new()
         {

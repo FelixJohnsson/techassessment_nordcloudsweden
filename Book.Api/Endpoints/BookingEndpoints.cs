@@ -20,7 +20,7 @@ public static class BookingEndpoints
             if (periodEnd is not null) { req.PeriodEnd = periodEnd.Value; }
             if (periodStart is not null) { req.PeriodStart = periodStart.Value; }
 
-            await mediator.Send(req);
+            return await mediator.Send(req);
         });
         app.MapPost("/booking/add", async (AddBookingRequest request, IMediator mediator) => await mediator.Send(request));
         app.MapPut("/booking/update", async (UpdateBookingRequest request, IMediator mediator) => await mediator.Send(request));
