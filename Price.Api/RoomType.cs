@@ -2,7 +2,7 @@
 
 public enum RoomType
 {
-    Economy,
-    Standard,
-    Deluxe
+    Economy = 0,
+    Standard = 1,
+    Deluxe = 2
 }

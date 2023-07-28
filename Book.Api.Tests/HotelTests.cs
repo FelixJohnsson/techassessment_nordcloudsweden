@@ -5,8 +5,13 @@ using Book.Api.Features.Hotel;
 
 namespace Book.Api.Tests;
 
-public class HotelTests
+public class HotelTests : BaseTests
 {
+    public HotelTests() : base()
+    {
+        
+    }
+
     [Fact]
     public async void AddHotel_NoId_Ok()
     {

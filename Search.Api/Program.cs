@@ -16,7 +16,16 @@ builder.Services.AddDbContext<HotelContext>(options =>
 });
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<IRepository<Hotel>, HotelRepositoryMock>();
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddTransient<IRepository<Hotel>, HotelRepositoryMock>();
+}
+else
+{
+    builder.Services.AddTransient<IRepository<Hotel>, HotelRepository>();
+}
+
 builder.Services.AddHealthChecks();
 
 builder.Services.AddCors(options =>

@@ -9,8 +9,13 @@ using Book.Api.Features.Bookings;
 
 namespace Book.Api.Tests;
 
-public class RoomTests
+public class RoomTests :  BaseTests
 {
+    public RoomTests() : base()
+    {
+        
+    }
+
     [Fact]
     public async void AddRoom_Ok()
     {

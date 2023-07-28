@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,8 @@ public class SearchHandlerTests : IDisposable
     private readonly DbContextOptions<HotelContext> _contextOptions;
     public SearchHandlerTests()
     {
+        Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
         var hotels = new List<Hotel>
         {
             new()
