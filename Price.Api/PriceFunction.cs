@@ -1,34 +1,29 @@
-using System;
-using System.IO;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Price.Api.PriceCalculator;
+using System.Threading.Tasks;
 
-namespace Price.Api
+namespace Price.Api;
+
+public static class PriceFunction
 {
-    public static class PriceFunction
+    [FunctionName("Price")]
+    public static async Task<IActionResult> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "price/{roomtype:int}/{guests:int}/{nights:int}")] HttpRequest req,
+        int roomType, int guests, int nights)
     {
-        [FunctionName("Price")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "/price/{roomtype:int}/{guests:int}/{nights:int}")] HttpRequest req,
-            RoomType roomType, int guests, int nights)
-        {
-            PriceRequest request = new() { RoomType = roomType, Guests = guests, Nights = nights };
+        PriceRequest request = new() { RoomType = (RoomType)roomType, Guests = guests, Nights = nights };
 
-            var calc = PriceCalculatorFactory.GetCalculator(request.RoomType);
+        var calc = PriceCalculatorFactory.GetCalculator(request.RoomType);
 
-            if (!calc.Validate(request))
-                return new BadRequestObjectResult("Request is not valid");
+        if (!calc.Validate(request))
+            return new BadRequestObjectResult("Request is not valid");
 
-            var price = calc.GetPrice(request);
+        var price = calc.GetPrice(request);
 
-            return new OkObjectResult(price);
+        return new OkObjectResult(price);
 
-        }
     }
 }

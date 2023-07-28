@@ -4,8 +4,12 @@ using Book.Api.Endpoints;
 using Book.Api.Migrations;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,7 +42,28 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.MigrateDatabase();
+app.UseExceptionHandler(e =>
+{
+    e.Run(async context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+        context.Response.ContentType = Application.Json;
+        
+        var exceptionHandlerPathFeature =
+                context.Features.Get<IExceptionHandlerPathFeature>();
+
+        var problemDetails = new ProblemDetails
+        {
+            Title = $"An unhandled exception occurred while processing the request",
+            Detail = exceptionHandlerPathFeature?.Error.Message,
+            Status = StatusCodes.Status500InternalServerError
+        };
+
+        await context.Response.WriteAsJsonAsync(JsonSerializer.Serialize(problemDetails));
+    });
+});
+
 app.UseCors();
 
 // Configure the HTTP request pipeline.
@@ -46,6 +71,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MigrateDatabase();
 }
 
 app.UseHttpsRedirection();
