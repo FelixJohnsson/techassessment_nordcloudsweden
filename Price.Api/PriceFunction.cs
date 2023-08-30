@@ -10,7 +10,7 @@ namespace Price.Api;
 public static class PriceFunction
 {
     [FunctionName("Price")]
-    public static async Task<IActionResult> Run(
+    public static IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = "price/{roomtype:int}/{guests:int}/{nights:int}")] HttpRequest req,
         int roomType, int guests, int nights)
     {

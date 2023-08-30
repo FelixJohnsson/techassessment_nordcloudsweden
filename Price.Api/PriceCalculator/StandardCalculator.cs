@@ -4,12 +4,10 @@ namespace Price.Api.PriceCalculator;
 
 public class StandardCalculator : IPriceCalculator
 {
-    private readonly decimal BasePrice = 500;
-    private readonly decimal GuestPrice = 60;
-
+    private readonly StandardizedPrices _prices = new StandardizedPrices("Standard");
     public decimal GetPrice(PriceRequest request)
     {
-        var nightprice = BasePrice + request.Guests * GuestPrice;
+        var nightprice = _prices.BasePrice * _prices.Multiplier + request.Guests * _prices.GuestPrice;
 
         return nightprice * request.Nights;
     }

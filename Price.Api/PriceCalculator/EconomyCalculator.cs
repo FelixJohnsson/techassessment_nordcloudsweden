@@ -4,13 +4,10 @@ namespace Price.Api.PriceCalculator;
 
 public class EconomyCalculator : IPriceCalculator
 {
-    private readonly decimal BasePrice = 500;
-    private readonly decimal Multiplier = 0.7M;
-    private readonly decimal GuestPrice = 50;
-
+    private readonly StandardizedPrices _prices = new StandardizedPrices("Economy");
     public decimal GetPrice(PriceRequest request)
     {
-        var nightprice = BasePrice * Multiplier + request.Guests * GuestPrice;
+        var nightprice = _prices.BasePrice * _prices.Multiplier + request.Guests * _prices.GuestPrice;
 
         return nightprice * request.Nights;
     }
