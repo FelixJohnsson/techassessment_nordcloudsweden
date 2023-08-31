@@ -158,6 +158,9 @@ namespace Book.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -171,16 +174,19 @@ namespace Book.Api.Migrations
                         new
                         {
                             Id = new Guid("086f2dae-aac0-4de4-9ad1-64662759430a"),
+                            Name = "Stockholm Hilton",
                             IsDeleted = false
                         },
                         new
                         {
                             Id = new Guid("08f6372e-b332-412a-bb61-a5d9682bc9a7"),
+                            Name = "London Ritz",
                             IsDeleted = false
                         },
                         new
                         {
                             Id = new Guid("efe32237-1ccb-4c95-98de-8960bbfdf0be"),
+                            Name = "Madrid Sheraton",
                             IsDeleted = false
                         });
                 });

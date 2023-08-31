@@ -4,7 +4,6 @@ export const SearchService = axios.create(
     {
         baseURL: "https://localhost:7055/hotel/",
         headers: {
-
             "Content-type": "application/json"
         }
     });

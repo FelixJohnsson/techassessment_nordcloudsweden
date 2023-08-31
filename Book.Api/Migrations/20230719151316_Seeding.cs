@@ -15,12 +15,12 @@ namespace Book.Api.Migrations
         {
             migrationBuilder.InsertData(
                 table: "Hotels",
-                columns: new[] { "Id", "IsDeleted" },
+                columns: new[] { "Id", "Name", "IsDeleted" },
                 values: new object[,]
                 {
-                    { new Guid("086f2dae-aac0-4de4-9ad1-64662759430a"), false },
-                    { new Guid("08f6372e-b332-412a-bb61-a5d9682bc9a7"), false },
-                    { new Guid("efe32237-1ccb-4c95-98de-8960bbfdf0be"), false }
+                    { new Guid("086f2dae-aac0-4de4-9ad1-64662759430a"), "Stockholm Hilton", false },
+                    { new Guid("08f6372e-b332-412a-bb61-a5d9682bc9a7"), "London Ritz", false },
+                    { new Guid("efe32237-1ccb-4c95-98de-8960bbfdf0be"), "Madrid Sheraton", false }
                 });
 
             migrationBuilder.InsertData(

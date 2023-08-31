@@ -19,6 +19,10 @@ public class HotelContext : DbContext
         var hotel2Id = Guid.NewGuid();
         var hotel3Id = Guid.NewGuid();
 
+        var hotel1Name = "Stockholm Hilton";
+        var hotel2Name = "London Ritz";
+        var hotel3Name = "Madrid Sheraton";
+
         var room101Id = Guid.NewGuid();
         var room3002Id = Guid.NewGuid();
         var roomAId = Guid.NewGuid();
@@ -28,9 +32,9 @@ public class HotelContext : DbContext
             .HasForeignKey(s => s.HotelId);
 
         builder.Entity<HotelRecord>().HasData(
-            new HotelRecord { Id = hotel1Id },
-            new HotelRecord { Id = hotel2Id },
-            new HotelRecord { Id = hotel3Id }
+            new HotelRecord { Id = hotel1Id, Name = hotel1Name },
+            new HotelRecord { Id = hotel2Id, Name = hotel2Name },
+            new HotelRecord { Id = hotel3Id, Name = hotel3Name }
             );
 
         builder.Entity<RoomRecord>()
