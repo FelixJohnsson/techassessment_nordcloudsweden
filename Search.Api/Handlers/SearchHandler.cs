@@ -17,7 +17,7 @@ public static class SearchHandler
             CancellationToken token) =>
         {
             IEnumerable<Hotel> hotels = await uof.GetHotelRepository().FilterAsync(h => h.Name.ToLower().Contains(term.ToLower()), skip, page, token);
-            int count = await uof.GetHotelRepository().CountAsync(h => h.Name.ToLower().Contains(term.ToLower()), token);
+            int count = await uof.GetHotelRepository().CountAsync(h => h.Name.ToLower().Contains(term.ToLower()), token);// Why not count the hotels in the previous query?
 
             return TypedResults.Ok(new SearchHotelsResult { Hotels = hotels, TotalCount = count });
         });

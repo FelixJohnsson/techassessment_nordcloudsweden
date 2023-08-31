@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { Modal, Button, Card, Col, Form, ListGroup, Row } from 'react-bootstrap';
+import { Button, Card, Col, Form, ListGroup, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { HotelModel } from '../models/HotelModel';
 import { SearchHotelsResult } from '../models/SearchHotelsResult';
 import { SearchService } from '../services';
 import * as Icon from 'react-bootstrap-icons';
+import DetailsModal from './DetailsModal';
 
-interface Hotel {
+export interface Hotel {
     id: string;
     name: string;
     description: string;
-    addrees: {
+    addrees: { // FIX SPELLING?
         city: string,
         country: string,
         street: string,
@@ -64,8 +65,8 @@ export const Search: React.FC = () => {
                 <Row><Col><hr /></Col></Row>                
                 <Row>
                     {
-                        hotels.map((hotel) => (
-                            <Col>
+                        hotels.map((hotel, index) => (
+                            <Col key={hotel.id}>
                                 <Card key={hotel.id}>
                                     <Card.Body style={{ display: 'flex', flexDirection: 'column'}}>
                                         <Card.Title onClick={() => handleOpenModal(hotel)} style={{cursor: 'pointer'}}>{hotel.name}</Card.Title>
@@ -77,27 +78,13 @@ export const Search: React.FC = () => {
                                             <ListGroup.Item><Icon.House /> Standard rooms: {hotel.standardRoomCount}</ListGroup.Item>
                                             <ListGroup.Item><Icon.CashStack /> Deluxe rooms: {hotel.deluxeRoomCount}</ListGroup.Item>
                                         </ListGroup>
-                                        <Button variant="primary" onClick={checkAvailibility}>Check availibility</Button>
+                                        <Button variant="primary" onClick={() => handleOpenModal(hotel)}>Check availability</Button>
                                     </Card.Body>
                                 </Card>
                             </Col>
                         ))
                     }
-                    <Modal show={showModal} onHide={handleCloseModal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>{selectedHotel?.name}</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p>{selectedHotel?.addrees.city}, {selectedHotel?.addrees.street}</p>
-
-                            {selectedHotel?.description}
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleCloseModal}>
-                                Close
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                    <DetailsModal showModal={showModal} handleCloseModal={handleCloseModal} selectedHotel={selectedHotel} />
                 </Row>
                 <Row><Col><p>Found hotels: {totalCount}</p></Col></Row>
             </Container>

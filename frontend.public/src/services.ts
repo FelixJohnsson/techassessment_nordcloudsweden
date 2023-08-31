@@ -8,6 +8,14 @@ export const SearchService = axios.create(
         }
     });
 
+export const AvailabilityService = axios.create(
+    {
+        baseURL: "https://localhost:7243/room/getavailablerooms/",
+        headers: {
+            "Content-type": "application/json"
+        }
+    });
+
 export const PriceService = axios.create(
     {
         baseURL: "https://localhost:7197",
